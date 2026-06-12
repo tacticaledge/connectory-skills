@@ -14,15 +14,24 @@ old decisions nobody wrote down.
 **Connectory collects that knowledge** (goals, policies, who owns what, what each repo is for)
 and makes it available to your agent while you code.
 
-**This repo is the setup guide.** It walks you through connecting Connectory to Cursor, VS Code,
-Claude Code, and other tools, then installing slash commands like `/check-plan` and
-`/check-code` so your agent can ask "does this fit our org?" before you build the wrong thing.
+**This repo is the setup guide.** Connect your IDE, sign in, install slash commands like
+`/check-plan`, and your agent can ask "does this fit our org?" before you build the wrong thing.
 
-| | |
-|---|---|
-| **Sign in / manage your org** | [app.connectory.ai](https://app.connectory.ai) |
-| **Connectory server URL** (for IDE config) | `https://api.connectory.ai/mcp` |
-| **How to sign in** | GitHub, in your IDE after you add the server (see [Install](#install-in-2-minutes)) |
+## Get started (2 minutes)
+
+[![Add to Cursor](https://cursor.com/deeplink/mcp-install-light.svg)](https://cursor.com/en/install-mcp?name=connectory&config=eyJ1cmwiOiJodHRwczovL2FwaS5jb25uZWN0b3J5LmFpL21jcCJ9)
+[![Sign in to Connectory](https://img.shields.io/badge/Sign_in-app.connectory.ai-2563eb?style=for-the-badge)](https://app.connectory.ai)
+
+| Step | What you do |
+|------|-------------|
+| **1** | Click **Add to Cursor** (or [VS Code install](https://insiders.vscode.dev/redirect/mcp/install?name=connectory&config=%7B%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fapi.connectory.ai%2Fmcp%22%7D), or [other IDE guide](#other-ides)) |
+| **2** | In your IDE: open MCP settings → **connectory** → **Connect** → sign in with **GitHub** |
+| **3** | Install slash commands: `npx skills add https://github.com/tacticaledge/connectory-skills -a cursor --copy -y` |
+| **4** | Try `/check-plan` in Agent chat, or ask: *"Call Connectory whoami"* |
+
+Not on Connectory yet? [Create an account](https://app.connectory.ai) first, then run the steps above.
+
+Other IDE? See [install guides](#other-ides). Server URL for manual config: `https://api.connectory.ai/mcp`
 
 ---
 
@@ -59,17 +68,11 @@ The more your team uses it, the better it knows how you work.
 
 ---
 
-## Install in 2 minutes
+## Install details
 
-### Cursor
+### Cursor (manual fallback)
 
-**One click** (use this link, not `cursor://`; GitHub cannot open app protocols):
-
-[![Add Connectory to Cursor](https://cursor.com/deeplink/mcp-install-light.svg)](https://cursor.com/en/install-mcp?name=connectory&config=eyJ1cmwiOiJodHRwczovL2FwaS5jb25uZWN0b3J5LmFpL21jcCJ9)
-
-Then **Settings → Tools & MCP → connectory → Connect** and sign in with GitHub.
-
-**Or copy-paste** into `.cursor/mcp.json` at your project root:
+If the **Add to Cursor** button at the top did not work, paste into `.cursor/mcp.json`:
 
 ```json
 {
@@ -81,42 +84,21 @@ Then **Settings → Tools & MCP → connectory → Connect** and sign in with Gi
 }
 ```
 
-Reload Cursor, Connect, sign in with GitHub, then ask: *"Call Connectory whoami."*
-
-Details (what the `config=` blob means): [docs/install-cursor.md](docs/install-cursor.md)
+Reload Cursor, then Connect in MCP settings. Full guide: [docs/install-cursor.md](docs/install-cursor.md)
 
 ### Other IDEs
-
-Server URL (same for everyone): `https://api.connectory.ai/mcp`
 
 | IDE | Guide |
 |-----|-------|
 | **Cursor** | [docs/install-cursor.md](docs/install-cursor.md) |
+| **VS Code** | [docs/install-vscode.md](docs/install-vscode.md) |
 | **Claude Code** | [docs/install-claude-code.md](docs/install-claude-code.md) |
 | **Codex** | [docs/install-codex.md](docs/install-codex.md) |
-| **VS Code** | [docs/install-vscode.md](docs/install-vscode.md) |
 | **Windsurf** | [docs/install-windsurf.md](docs/install-windsurf.md) |
 
-More copy-paste configs: [examples/](examples/).
+Copy-paste configs: [examples/](examples/). Manage org knowledge at [app.connectory.ai](https://app.connectory.ai).
 
-### Sign in and manage your org
-
-1. After adding the MCP server, **Connect** in your IDE and sign in with **GitHub**.
-2. Manage your account and organizations at **[app.connectory.ai](https://app.connectory.ai)**.
-3. View and edit org knowledge (Genie) at `https://app.connectory.ai/org/{org_slug}/genie`.
-
----
-
-## 4-step setup
-
-| Step | What | Time |
-|------|------|------|
-| [1. MCP](#install-in-2-minutes) | Connect Connectory in your IDE | ~2 min |
-| [2. Skills](#step-2-install-skills-recommended) | Install slash commands | ~1 min |
-| [3. Verify](#step-3-verify) | Confirm `whoami` works | ~30 sec |
-| [4. Use](#step-4-use) | `/check-plan`, `/check-code`, … | ongoing |
-
-### Step 2: Install skills (recommended)
+### Install skills
 
 Skills add slash commands so you can type `/check-plan` instead of explaining the whole
 workflow every time.
@@ -154,8 +136,8 @@ needs that org name for every check.
 I'm about to add caching to our API layer. Here's my plan: ...
 ```
 
-If tools are missing, redo [MCP connect](#install-in-2-minutes). If slash commands are
-missing, redo [Step 2](#step-2-install-skills-recommended).
+If tools are missing, redo [Get started](#get-started-2-minutes). If slash commands are
+missing, redo [Install skills](#install-skills).
 
 ### Step 4: Use
 
