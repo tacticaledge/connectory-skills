@@ -6,60 +6,56 @@
 
 ## Your agent codes for the prompt. Connectory makes it code for your organization.
 
-AI coding agents are powerful, but they optimize for what is in front of them: the file, the
-ticket, the local fix. They do not carry your long-term goals, compliance rules, or
-architectural decisions unless something connects them to institutional memory. Without that,
-every session starts from zero and drift is inevitable.
+AI coding agents are good at the task you give them: fix this file, implement this ticket,
+ship this patch. They do not automatically know your company's goals, compliance rules, or
+why certain patterns exist. That knowledge usually lives in people's heads, Slack threads, and
+old decisions nobody wrote down.
 
-**Connectory is that memory:** objectives, policies, ownership, and repo context your team
-builds together, knowledge that lives nowhere else. We connect your coding agent to it (and to
-the people and decisions behind it) while you work.
+**Connectory collects that knowledge** (goals, policies, who owns what, what each repo is for)
+and makes it available to your agent while you code.
 
-**This repo is your install bridge:** wire the MCP server into your IDE, add Agent Skills, and
-start consulting org knowledge with `/check-plan`, `/check-code`, and more.
+**This repo is the setup guide.** It walks you through connecting Connectory to Cursor, VS Code,
+Claude Code, and other tools, then installing slash commands like `/check-plan` and
+`/check-code` so your agent can ask "does this fit our org?" before you build the wrong thing.
 
 | | |
 |---|---|
-| **Product home** | [app.connectory.ai](https://app.connectory.ai) |
-| **MCP endpoint** | `https://api.connectory.ai/mcp` |
-| **Sign in** | GitHub OAuth (in your IDE after connecting MCP) |
+| **Sign in / manage your org** | [app.connectory.ai](https://app.connectory.ai) |
+| **Connectory server URL** (for IDE config) | `https://api.connectory.ai/mcp` |
+| **How to sign in** | GitHub, in your IDE after you add the server (see [Install](#install-in-2-minutes)) |
 
 ---
 
 ## What Connectory does
 
-Connectory is a multi-tenant AI platform for engineering organizations. It captures
-**organizational judgment** that static analysis and generic LLM reviewers cannot: what your
-company is trying to do, who owns what, which patterns are intentional, and what is still
-uncertain.
-
-That memory powers everything below:
+Connectory holds what your engineering org knows but rarely documents: what you are building,
+what rules matter, who owns which repos, and what is still undecided. That context feeds
+everything below.
 
 | Product | What it does |
 |---------|--------------|
-| **Institutional knowledge MCP** | `check_idea`, `check_plan`, `check_code`, `check_changes` consult org policy and repo context while you work in your IDE |
-| **SlopBuster** | Gamified PR review that learns your repo's quality history and gets smarter every month |
-| **OrgWatch** | Contributor intelligence across humans and AI agents; leadership dashboards and the Genie knowledge graph |
-| **API Bot** | Conversational agent that executes real API calls with secure credentials |
-| **SlackBot** | Teaching DMs and praise at the moment of consequence |
+| **IDE checks** (this repo) | Your agent can run `check_idea`, `check_plan`, `check_code`, and `check_changes` against your org's knowledge while you work |
+| **SlopBuster** | PR review that learns your repo over time instead of starting from scratch every diff |
+| **OrgWatch** | See how your whole team (humans and AI agents) is contributing |
+| **API Bot** | Chat with an agent that can run real API calls for you |
+| **SlackBot** | Get teaching and feedback in Slack when it matters |
 
-Works with **any organization** on Connectory: a lab, a startup, or a team inside a
-multinational. Sign in with GitHub; your org is resolved at runtime via `whoami`.
+Works for any team on Connectory (startup, lab, or big-company squad). Sign in with GitHub.
+Your org is picked automatically once connected.
 
 ---
 
-## Why it compounds
+## Why it gets smarter over time
 
-Other tools start from zero on every diff. Connectory compounds.
+Most AI tools treat every request as a fresh start. Connectory remembers.
 
-| Other review tools | Connectory |
-|--------------------|------------|
-| Every review starts from zero | Memory persists across every PR and check |
-| Generic patterns for all repos | Learned patterns specific to your org and repos |
-| Reads the diff, forgets everything | Builds quality history over time |
-| Stateless | Compounding |
+| Typical AI review | Connectory |
+|-------------------|------------|
+| Forgets your repo after each PR | Remembers quality history and patterns |
+| Same generic advice for everyone | Advice specific to your org and repos |
+| Only sees the current diff | Builds on every PR, check, and confirmation |
 
-Every PR, check, and confirmation makes the next judgment smarter.
+The more your team uses it, the better it knows how you work.
 
 ---
 
@@ -77,7 +73,8 @@ Raw link: `cursor://anysphere.cursor-deeplink/mcp/install?name=connectory&config
 
 ### Manual config (any IDE)
 
-Connectory is a **hosted HTTP MCP server** (OAuth via GitHub). Same URL for every org:
+Add this server URL to your IDE's MCP settings (sign in with GitHub when prompted). Same URL
+for every org:
 
 ```
 https://api.connectory.ai/mcp
@@ -119,15 +116,15 @@ More copy-paste configs: [examples/](examples/).
 
 | Step | What | Time |
 |------|------|------|
-| [1. MCP](#install-in-2-minutes) | Wire Connectory into your IDE | ~2 min |
+| [1. MCP](#install-in-2-minutes) | Connect Connectory in your IDE | ~2 min |
 | [2. Skills](#step-2-install-skills-recommended) | Install slash commands | ~1 min |
 | [3. Verify](#step-3-verify) | Confirm `whoami` works | ~30 sec |
 | [4. Use](#step-4-use) | `/check-plan`, `/check-code`, … | ongoing |
 
 ### Step 2: Install skills (recommended)
 
-Skills teach your agent when and how to call Connectory (slash commands, branch review flow,
-verdicts).
+Skills add slash commands so you can type `/check-plan` instead of explaining the whole
+workflow every time.
 
 ```bash
 npx skills add https://github.com/tacticaledge/connectory-skills -a cursor --copy -y
@@ -151,8 +148,8 @@ npx skills update    # refresh later
 
 In Agent chat, ask your agent to call the Connectory MCP tool **`whoami`**.
 
-You should see your GitHub identity and **`orgs`** (organizations you belong to). Use
-`orgs[].slug` as `org_slug` on every `check_*` call.
+You should see your GitHub username and which **organizations** you belong to. Your agent
+needs that org name for every check.
 
 **Try a first check:**
 
@@ -199,9 +196,9 @@ Optional: add a short section to your repo's `AGENTS.md` so all agents see the w
 
 ## Security and privacy
 
-- **OAuth 2.1 via GitHub.** No tokens in your repo or MCP config files.
-- **Read-only consultation.** `check_*` tools consult org context; they do not mutate your codebase.
-- **Multi-tenant.** One hosted URL; your org is resolved at runtime via `whoami`.
+- **Sign in with GitHub.** No API keys or tokens go in your repo or config files.
+- **Checks are read-only.** They look up your org's knowledge; they do not change your code.
+- **One server, many orgs.** The same URL works for everyone; you only see orgs you belong to.
 - **Manage access** at [app.connectory.ai](https://app.connectory.ai).
 
 Details: [docs/security.md](docs/security.md)

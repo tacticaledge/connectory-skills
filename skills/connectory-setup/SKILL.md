@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 # Connectory setup
 
-Guide the user through the public install bridge:
+Guide the user through the setup guide in this repo:
 [github.com/tacticaledge/connectory-skills](https://github.com/tacticaledge/connectory-skills)
 
 ## Order
