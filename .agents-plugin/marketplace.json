@@ -1,0 +1,37 @@
+{
+  "name": "connectory-skills",
+  "metadata": {
+    "description": "Connectory: institutional memory for engineering orgs. MCP server + Agent Skills to check ideas, plans, code, and branches against org knowledge.",
+    "version": "1.1.0",
+    "homepage": "https://app.connectory.ai",
+    "repository": "https://github.com/tacticaledge/connectory-skills"
+  },
+  "plugins": [
+    {
+      "name": "connectory",
+      "source": "./",
+      "description": "Install Connectory MCP and slash commands (/check-plan, /check-code, /check-changes) for org policy consultation in your IDE",
+      "version": "1.1.0",
+      "category": "developer-tools",
+      "tags": [
+        "connectory",
+        "mcp",
+        "institutional-knowledge",
+        "check-plan",
+        "check-code",
+        "check-changes",
+        "org-policy",
+        "pr-review",
+        "agent-skills"
+      ],
+      "skills": [
+        "./skills/connectory-setup",
+        "./skills/connectory/check-idea",
+        "./skills/connectory/check-plan",
+        "./skills/connectory/check-code",
+        "./skills/connectory/check-changes",
+        "./skills/connectory/auto-check"
+      ]
+    }
+  ]
+}

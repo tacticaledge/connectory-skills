@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "connectory": {
+      "type": "http",
+      "url": "https://api.connectory.ai/mcp"
+    }
+  }
+}

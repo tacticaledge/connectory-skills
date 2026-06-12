@@ -1,0 +1,8 @@
+# Merge into .codex/config.toml. [features] must come before [mcp_servers.*]
+
+[features]
+experimental_use_rmcp_client = true
+
+[mcp_servers.connectory]
+url = "https://api.connectory.ai/mcp"
+enabled = true
