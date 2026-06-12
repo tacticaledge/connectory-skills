@@ -61,26 +61,9 @@ The more your team uses it, the better it knows how you work.
 
 ## Install in 2 minutes
 
-### One-click (recommended)
+### Cursor (copy-paste)
 
-**Cursor:** click to add the MCP server, then Connect in Settings and sign in with GitHub.
-
-[![Add Connectory MCP to Cursor](https://cursor.com/deeplink/mcp-install-light.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=connectory&config=eyJ1cmwiOiAiaHR0cHM6Ly9hcGkuY29ubmVjdG9yeS5haS9tY3AifQ%3D%3D)
-
-Raw link: `cursor://anysphere.cursor-deeplink/mcp/install?name=connectory&config=eyJ1cmwiOiAiaHR0cHM6Ly9hcGkuY29ubmVjdG9yeS5haS9tY3AifQ%3D%3D`
-
-**VS Code:** [Install Connectory MCP in VS Code](https://insiders.vscode.dev/redirect/mcp/install?name=connectory&config=%7B%22name%22%3A+%22connectory%22%2C+%22url%22%3A+%22https%3A%2F%2Fapi.connectory.ai%2Fmcp%22%7D)
-
-### Manual config (any IDE)
-
-Add this server URL to your IDE's MCP settings (sign in with GitHub when prompted). Same URL
-for every org:
-
-```
-https://api.connectory.ai/mcp
-```
-
-**Quick copy (Cursor / project root):** create or merge into `.cursor/mcp.json`:
+1. Create `.cursor/mcp.json` in your project root:
 
 ```json
 {
@@ -92,7 +75,15 @@ https://api.connectory.ai/mcp
 }
 ```
 
-Then **Cursor Settings → Tools & MCP → connectory → Connect** and sign in with GitHub.
+2. Reload Cursor (**Command Palette → Developer: Reload Window**).
+3. **Settings → Tools & MCP → connectory → Connect** and sign in with GitHub.
+4. Ask your agent: *"Call Connectory whoami."*
+
+Step-by-step with screenshots path: [docs/install-cursor.md](docs/install-cursor.md)
+
+### Other IDEs
+
+Server URL (same for everyone): `https://api.connectory.ai/mcp`
 
 | IDE | Guide |
 |-----|-------|

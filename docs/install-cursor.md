@@ -1,21 +1,13 @@
-# Install Connectory MCP in Cursor
+# Install Connectory in Cursor
 
-## 0. One-click install (fastest)
+Takes about 2 minutes. **Use the steps below.** The "Add to Cursor" button on GitHub often
+does nothing (GitHub cannot open the Cursor app). Copy-paste always works.
 
-[![Add Connectory MCP to Cursor](https://cursor.com/deeplink/mcp-install-light.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=connectory&config=eyJ1cmwiOiAiaHR0cHM6Ly9hcGkuY29ubmVjdG9yeS5haS9tY3AifQ%3D%3D)
+## 1. Add the server config
 
-Raw link:
+At your **project root**, create or edit `.cursor/mcp.json`.
 
-```
-cursor://anysphere.cursor-deeplink/mcp/install?name=connectory&config=eyJ1cmwiOiAiaHR0cHM6Ly9hcGkuY29ubmVjdG9yeS5haS9tY3AifQ%3D%3D
-```
-
-Click the link, approve the install prompt in Cursor, then continue at [Connect (OAuth)](#2-connect-oauth).
-
-## 1. Add MCP config (manual)
-
-At your **project root**, create or edit `.cursor/mcp.json`. Merge the `connectory` entry if
-you already have other servers:
+If the file is new, paste this whole thing:
 
 ```json
 {
@@ -27,45 +19,46 @@ you already have other servers:
 }
 ```
 
-For **all projects**, use `~/.cursor/mcp.json` with the same structure.
+If you already have other MCP servers, add only the `"connectory"` block inside
+`"mcpServers"`.
 
-Example file: [examples/cursor-mcp.json](../examples/cursor-mcp.json)
+**All projects:** use `~/.cursor/mcp.json` instead (same JSON).
 
-## 2. Connect (OAuth)
+Copy from [examples/cursor-mcp.json](../examples/cursor-mcp.json) if you prefer.
+
+## 2. Reload Cursor
+
+**Command Palette → Developer: Reload Window**
+
+## 3. Sign in with GitHub
 
 1. Open **Cursor Settings** (Ctrl+Shift+J / Cmd+Shift+J).
 2. Go to **Tools & MCP**.
 3. Find **connectory** and click **Connect**.
-4. Sign in with **GitHub** (same account as your Connectory org at [app.connectory.ai](https://app.connectory.ai)).
+4. Sign in with **GitHub** (same account you use at [app.connectory.ai](https://app.connectory.ai)).
 
-## 3. Reload
-
-Reload the window: **Command Palette → Developer: Reload Window**.
-
-## 4. Verify
+## 4. Check it works
 
 In Agent chat, ask: *"Call Connectory whoami."*
 
-You should see your GitHub username and `orgs`. If not, confirm connectory is enabled and
-connected in Settings.
+You should see your GitHub username and which organizations you belong to.
 
-## 5. Install skills (recommended)
-
-Back to [README](../README.md#step-2-install-skills-recommended):
+## 5. Install slash commands (recommended)
 
 ```bash
 npx skills add https://github.com/tacticaledge/connectory-skills -a cursor --copy -y
 ```
 
-Then try `/check-plan` in Agent chat.
+Reload Cursor, then try `/check-plan` in Agent chat.
+
+Full guide: [README](../README.md)
 
 ## Troubleshooting
 
-| Symptom | Fix |
+| Problem | Fix |
 |---------|-----|
-| Deeplink does nothing | Paste the raw `cursor://` link into your browser; confirm Cursor is installed |
-| **connectory** not in Settings | Check `.cursor/mcp.json` syntax; reload window |
-| Tools missing after connect | **Tools & MCP → connectory → Connect** again; reload |
-| OAuth loop | Sign out and sign in with the GitHub account tied to your Connectory org |
-| `whoami` shows no `orgs` | Confirm membership at [app.connectory.ai](https://app.connectory.ai) |
-| `/check-plan` missing | `npx skills update -a cursor` then reload |
+| **connectory** not in Settings | Check `.cursor/mcp.json` for typos; reload window |
+| Connect button missing or greyed out | Confirm the JSON file is saved; reload again |
+| Sign-in loop | Use the GitHub account tied to your Connectory org |
+| No organizations in whoami | Join or confirm membership at [app.connectory.ai](https://app.connectory.ai) |
+| `/check-plan` not in menu | Run `npx skills update -a cursor`, then reload |
