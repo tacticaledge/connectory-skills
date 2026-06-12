@@ -61,9 +61,15 @@ The more your team uses it, the better it knows how you work.
 
 ## Install in 2 minutes
 
-### Cursor (copy-paste)
+### Cursor
 
-1. Create `.cursor/mcp.json` in your project root:
+**One click** (use this link, not `cursor://`; GitHub cannot open app protocols):
+
+[![Add Connectory to Cursor](https://cursor.com/deeplink/mcp-install-light.svg)](https://cursor.com/en/install-mcp?name=connectory&config=eyJ1cmwiOiJodHRwczovL2FwaS5jb25uZWN0b3J5LmFpL21jcCJ9)
+
+Then **Settings → Tools & MCP → connectory → Connect** and sign in with GitHub.
+
+**Or copy-paste** into `.cursor/mcp.json` at your project root:
 
 ```json
 {
@@ -75,11 +81,9 @@ The more your team uses it, the better it knows how you work.
 }
 ```
 
-2. Reload Cursor (**Command Palette → Developer: Reload Window**).
-3. **Settings → Tools & MCP → connectory → Connect** and sign in with GitHub.
-4. Ask your agent: *"Call Connectory whoami."*
+Reload Cursor, Connect, sign in with GitHub, then ask: *"Call Connectory whoami."*
 
-Step-by-step with screenshots path: [docs/install-cursor.md](docs/install-cursor.md)
+Details (what the `config=` blob means): [docs/install-cursor.md](docs/install-cursor.md)
 
 ### Other IDEs
 
