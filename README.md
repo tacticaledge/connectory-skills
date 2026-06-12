@@ -4,14 +4,19 @@
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-compatible-green.svg)](https://agentskills.io)
 [![MCP](https://img.shields.io/badge/MCP-Streamable%20HTTP-purple.svg)](https://modelcontextprotocol.io)
 
-**Connectory is the institutional memory of your engineering organization.**
+## Your agent codes for the prompt. Connectory makes it code for your organization.
 
-Capture knowledge that is usually never written down: objectives, policies, ownership, repo
-intelligence, and open questions. Connectory builds that graph by interacting with
-decision-makers and coders, then wires it into every judgment your team makes.
+AI coding agents are powerful, but they optimize for what is in front of them: the file, the
+ticket, the local fix. They do not carry your long-term goals, compliance rules, or
+architectural decisions unless something connects them to institutional memory. Without that,
+every session starts from zero and drift is inevitable.
 
-**This repo is your bridge:** install the MCP server into your IDE, add Agent Skills, and
-start consulting org knowledge while you code.
+**Connectory is that memory:** objectives, policies, ownership, and repo context your team
+builds together, knowledge that lives nowhere else. We connect your coding agent to it (and to
+the people and decisions behind it) while you work.
+
+**This repo is your install bridge:** wire the MCP server into your IDE, add Agent Skills, and
+start consulting org knowledge with `/check-plan`, `/check-code`, and more.
 
 | | |
 |---|---|
