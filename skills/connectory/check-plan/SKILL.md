@@ -10,7 +10,7 @@ disable-model-invocation: true
 
 Slash: **`/check-plan`**
 
-1. Read [../_reference.md](../_reference.md) for MCP transport rules.
+1. Read [references/mcp-rules.md](references/mcp-rules.md) for MCP transport rules.
 2. `whoami` once → `org_slug` from `whoami.orgs`; `repo` from git remote when repo-specific.
 3. Call MCP **`check_plan`** with the plan from the conversation (and `repo` when known).
 4. Reply from **`user_guidance`** only. On **`misaligned`**, stop implementing.

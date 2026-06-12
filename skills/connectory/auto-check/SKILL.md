@@ -21,7 +21,7 @@ this turn, or when Connectory MCP is not connected.
 1. Pick tool: `check_code` (1–2 files), `check_plan` (multi-file or stated plan),
    `check_idea` (direction only). Use `/check-changes` explicitly for branch review.
 2. Launch **Task** with `run_in_background: true`, `subagent_type: generalPurpose`.
-3. Sub-agent: read `../_reference.md`, call `whoami`, call the chosen MCP tool with
+3. Sub-agent: read `references/mcp-rules.md`, call `whoami`, call the chosen MCP tool with
    relevant context, return `verdict` and `user_guidance` summary.
 4. Do not await the sub-agent. Finish the main response first.
 5. On completion: surface `misaligned` or `caution` promptly; `aligned` may be one line.

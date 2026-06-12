@@ -10,7 +10,7 @@ disable-model-invocation: true
 
 Slash: **`/check-changes`**
 
-1. Read [../_reference.md](../_reference.md) for MCP transport rules and branch checklist.
+1. Read [references/mcp-rules.md](references/mcp-rules.md) for MCP transport rules and branch checklist.
 2. `whoami` once → `org_slug` from `whoami.orgs`; `repo` short name from git remote.
 3. `prepare_review_diff(org_slug, repo)` → `diff_budget_bytes`, `git_argv`, `git_argv_full`.
 4. Local git at repo root (exec argv list, not shell string).
