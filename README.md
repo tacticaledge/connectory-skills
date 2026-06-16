@@ -35,36 +35,26 @@ Other IDE? See [install guides](#other-ides). Server URL for manual config: `htt
 
 ---
 
-## What Connectory does
+## What you get from this repo
 
-Connectory holds what your engineering org knows but rarely documents: what you are building,
-what rules matter, who owns which repos, and what is still undecided. That context feeds
-everything below.
+This repository is **IDE setup only**: connect MCP, install slash commands, and run org-aware
+checks while you code.
 
-| Product | What it does |
-|---------|--------------|
-| **IDE checks** (this repo) | Your agent can run `check_idea`, `check_plan`, `check_code`, and `check_changes` against your org's knowledge while you work |
-| **SlopBuster** | PR review that learns your repo over time instead of starting from scratch every diff |
-| **OrgWatch** | See how your whole team (humans and AI agents) is contributing |
-| **API Bot** | Chat with an agent that can run real API calls for you |
-| **SlackBot** | Get teaching and feedback in Slack when it matters |
+| What | How |
+|------|-----|
+| **Policy checks in your IDE** | MCP tools `check_idea`, `check_plan`, `check_code`, `check_changes` |
+| **Slash commands** | `/check-plan`, `/check-code`, etc. (after `npx skills add`) |
+| **Org context** | Goals, policies, and repo knowledge from [app.connectory.ai](https://app.connectory.ai) |
 
-Works for any team on Connectory (startup, lab, or big-company squad). Sign in with GitHub.
-Your org is picked automatically once connected.
+Sign in with GitHub. Your org is picked automatically once connected.
 
 ---
 
-## Why it gets smarter over time
+## Why checks improve over time
 
-Most AI tools treat every request as a fresh start. Connectory remembers.
-
-| Typical AI review | Connectory |
-|-------------------|------------|
-| Forgets your repo after each PR | Remembers quality history and patterns |
-| Same generic advice for everyone | Advice specific to your org and repos |
-| Only sees the current diff | Builds on every PR, check, and confirmation |
-
-The more your team uses it, the better it knows how you work.
+Connectory remembers your organization's goals, policies, and past decisions. The more your
+team adds and confirms knowledge in the dashboard, the more useful `check_*` results become.
+Each check uses that context; it is not a one-off generic LLM opinion.
 
 ---
 
