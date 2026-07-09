@@ -62,7 +62,9 @@ Each check uses that context; it is not a one-off generic LLM opinion.
 
 ### Cursor (manual fallback)
 
-If the **Add to Cursor** button at the top did not work, paste into `.cursor/mcp.json`:
+**Recommended:** install once in **`~/.cursor/mcp.json`** (works in every project; OAuth once).
+Same pattern as Linear or Sentry. Do not duplicate the same URL in a project
+`.cursor/mcp.json`.
 
 ```json
 {
@@ -74,7 +76,8 @@ If the **Add to Cursor** button at the top did not work, paste into `.cursor/mcp
 }
 ```
 
-Reload Cursor, then Connect in MCP settings. Full guide: [docs/install-cursor.md](docs/install-cursor.md)
+Reload Cursor, then **Settings → Tools & MCP → connectory → Connect** (GitHub).
+Full guide: [docs/install-cursor.md](docs/install-cursor.md)
 
 ### Other IDEs
 
@@ -177,7 +180,9 @@ Details: [docs/security.md](docs/security.md)
 | Symptom | Fix |
 |---------|-----|
 | MCP tools not appearing | Reload IDE window; confirm **connectory** is connected in MCP settings |
-| OAuth loop or 401 | Sign in again with the GitHub account tied to your Connectory org |
+| Connected then **Error** / 0 tools | MCP settings → **Disconnect** → **Connect**; reload window. Do not change URL after OAuth. |
+| Duplicate or flaky MCP | Use **one** install: `~/.cursor/mcp.json` **or** project `.cursor/mcp.json`, not both with the same URL |
+| OAuth loop or 401 | Disconnect → Connect; use the GitHub account tied to your Connectory org |
 | `whoami` shows no `orgs` | Join or confirm org membership at [app.connectory.ai](https://app.connectory.ai) |
 | Slash commands missing | `npx skills update -a <agent>` then reload IDE |
 | Branch review incomplete | Run `prepare_review_diff` → local git → `check_changes` with full unified diff |

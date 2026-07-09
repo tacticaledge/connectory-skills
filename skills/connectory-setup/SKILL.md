@@ -13,9 +13,10 @@ Guide the user through the setup guide in this repo:
 
 ## Order
 
-1. **MCP** (required): follow the doc for their IDE under `docs/install-*.md` in that repo,
-   or copy from `examples/`. URL: `https://api.connectory.ai/mcp`.
-   OAuth via GitHub in IDE settings. Product home: `https://app.connectory.ai`.
+1. **MCP** (required): follow `docs/install-*.md` in that repo. **Cursor:** prefer a single
+   global install in `~/.cursor/mcp.json` (not duplicated per project). URL:
+   `https://api.connectory.ai/mcp`. OAuth via GitHub in IDE settings (Connect, not Logout).
+   Product home: `https://app.connectory.ai`.
 2. **Verify**: call MCP `whoami`. Expect `orgs` with at least one slug.
 3. **Skills** (recommended): `npx skills add https://github.com/tacticaledge/connectory-skills -a <agent> --copy -y`
 4. **Try**: `/check-plan` with something they are working on.
