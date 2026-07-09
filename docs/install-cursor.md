@@ -114,6 +114,7 @@ Reload Cursor, then try `/check-plan` in Agent chat.
 | Cursor does not open | Install/update Cursor; paste the https link into your browser address bar |
 | **connectory** not in Settings | Add [global `~/.cursor/mcp.json`](#recommended-one-global-install-all-projects); check JSON syntax; reload window |
 | Stuck on **Loading tools** (yellow dot, 0 tools) | Toggle **off** → remove the `connectory` block from `~/.cursor/mcp.json` → **Reload Window** → add the block back → reload again → toggle on → click **Connect** (OAuth). Toggle alone is not enough. |
+| **Error** / `net::ERR_FAILED` in MCP output (global install) | Remove `connectory` from `~/.cursor/mcp.json`. Add it to **this project's** `.cursor/mcp.json` instead (same JSON), reload, **Connect**. Same pattern as a per-repo MCP entry. |
 | Connected then **Error** / 0 tools | MCP settings → **Disconnect** → **Connect** again; reload window once. Do not change the URL after OAuth. |
 | Two **connectory** entries or flaky OAuth | Remove project `.cursor/mcp.json` connectory block if you use global install (or vice versa). One URL, one scope. |
 | Sign-in loop | Use the GitHub account tied to your Connectory org; Disconnect → Connect |
