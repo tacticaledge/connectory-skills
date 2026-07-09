@@ -113,6 +113,7 @@ Reload Cursor, then try `/check-plan` in Agent chat.
 | Button does nothing | Use the `https://cursor.com/en/install-mcp?...` link above, not a `cursor://` link |
 | Cursor does not open | Install/update Cursor; paste the https link into your browser address bar |
 | **connectory** not in Settings | Add [global `~/.cursor/mcp.json`](#recommended-one-global-install-all-projects); check JSON syntax; reload window |
+| Stuck on **Loading tools** (yellow dot, 0 tools) | Toggle **off** → remove the `connectory` block from `~/.cursor/mcp.json` → **Reload Window** → add the block back → reload again → toggle on → click **Connect** (OAuth). Toggle alone is not enough. |
 | Connected then **Error** / 0 tools | MCP settings → **Disconnect** → **Connect** again; reload window once. Do not change the URL after OAuth. |
 | Two **connectory** entries or flaky OAuth | Remove project `.cursor/mcp.json` connectory block if you use global install (or vice versa). One URL, one scope. |
 | Sign-in loop | Use the GitHub account tied to your Connectory org; Disconnect → Connect |

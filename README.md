@@ -180,6 +180,7 @@ Details: [docs/security.md](docs/security.md)
 | Symptom | Fix |
 |---------|-----|
 | MCP tools not appearing | Reload IDE window; confirm **connectory** is connected in MCP settings |
+| Stuck on **Loading tools** | Toggle off; remove `connectory` from `~/.cursor/mcp.json`; reload window; add it back; reload; toggle on; click **Connect** for GitHub OAuth |
 | Connected then **Error** / 0 tools | MCP settings → **Disconnect** → **Connect**; reload window. Do not change URL after OAuth. |
 | Duplicate or flaky MCP | Use **one** install: `~/.cursor/mcp.json` **or** project `.cursor/mcp.json`, not both with the same URL |
 | OAuth loop or 401 | Disconnect → Connect; use the GitHub account tied to your Connectory org |
