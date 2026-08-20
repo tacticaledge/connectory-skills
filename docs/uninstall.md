@@ -7,6 +7,8 @@ Remove the `connectory` entry only. Keep other MCP servers.
 | File | Key to remove |
 |------|----------------|
 | `.cursor/mcp.json` | `mcpServers.connectory` |
+| `.kiro/settings/mcp.json` | `mcpServers.connectory` |
+| `~/.kiro/settings/mcp.json` | `mcpServers.connectory` |
 | `.mcp.json` | `mcpServers.connectory` |
 | `.vscode/mcp.json` | `servers.connectory` |
 | `.codex/config.toml` | `[mcp_servers.connectory]` |
@@ -18,7 +20,7 @@ codex mcp remove connectory      # if installed
 claude mcp remove connectory     # if installed
 ```
 
-**IDE:** Cursor **Settings → Tools & MCP** → disconnect or disable **connectory**.
+**IDE:** Disconnect or disable **connectory** in your IDE's MCP Server view.
 
 ## Skills
 
@@ -26,10 +28,12 @@ claude mcp remove connectory     # if installed
 npx skills remove check-idea check-plan check-code check-changes auto-check -a cursor -y
 ```
 
-Replace `-a cursor` with your agent. Also delete copied folders if an older setup wrote files
-by hand:
+Replace `-a cursor` with your agent (`-a kiro-cli` for Kiro). Also delete copied folders if
+an older setup wrote files by hand:
 
 - `.cursor/skills/connectory/`
+- `.kiro/skills/connectory/`
+- `~/.kiro/skills/connectory/`
 - `.claude/skills/connectory/`
 - `.agents/skills/connectory/`
 - `.cursor/skills/connectory-institutional-knowledge/` (legacy name)

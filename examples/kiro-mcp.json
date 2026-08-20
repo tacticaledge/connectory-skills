@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "connectory": {
+      "url": "https://api.connectory.ai/mcp"
+    }
+  }
+}

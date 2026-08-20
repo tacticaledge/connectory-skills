@@ -85,6 +85,7 @@ Full guide: [docs/install-cursor.md](docs/install-cursor.md)
 |-----|-------|
 | **Cursor** | [docs/install-cursor.md](docs/install-cursor.md) |
 | **VS Code** | [docs/install-vscode.md](docs/install-vscode.md) |
+| **Kiro** | [docs/install-kiro.md](docs/install-kiro.md) |
 | **Claude Code** | [docs/install-claude-code.md](docs/install-claude-code.md) |
 | **Codex** | [docs/install-codex.md](docs/install-codex.md) |
 | **Windsurf** | [docs/install-windsurf.md](docs/install-windsurf.md) |
@@ -103,6 +104,7 @@ npx skills add https://github.com/tacticaledge/connectory-skills -a cursor --cop
 | Agent | Flag |
 |-------|------|
 | Cursor | `-a cursor` |
+| Kiro | `-a kiro-cli` |
 | Claude Code | `-a claude-code` |
 | Codex | `-a codex` |
 | VS Code | `-a vscode` |
