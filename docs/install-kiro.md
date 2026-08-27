@@ -8,7 +8,8 @@ For this project, create or edit `.kiro/settings/mcp.json`:
 {
   "mcpServers": {
     "connectory": {
-      "url": "https://api.connectory.ai/mcp"
+      "url": "https://api.connectory.ai/mcp",
+      "timeout": 600000
     }
   }
 }
@@ -23,6 +24,10 @@ Example file: [examples/kiro-mcp.json](../examples/kiro-mcp.json)
 If your organization gives you a different Connectory endpoint, use that URL instead of
 `https://api.connectory.ai/mcp`. Keep one effective `connectory` definition per scope and
 never put OAuth tokens or client secrets in the file.
+
+Kiro's per-server `timeout` is in milliseconds. Ten minutes leaves headroom for synchronous
+Connectory institutional checks; RepoQuest assessments still use the immediate-return
+`start_repoquest_check` + `get_repoquest_run` polling workflow.
 
 ## 2. Connect with GitHub
 
@@ -57,6 +62,7 @@ For a user-wide skills install, add `--global`.
 |---------|-----|
 | `connectory` is missing | Confirm the file is `.kiro/settings/mcp.json`, then save it and check the MCP Server view |
 | OAuth loop or expired session | Use **Re-authenticate** in the MCP Server view and complete GitHub sign-in |
+| A synchronous Connectory tool times out | Confirm the `connectory` server has `"timeout": 600000`; do not change Kiro's initialization timeout |
 | `whoami` shows no `orgs` | Confirm membership in the Connectory dashboard for the endpoint you configured |
 | Slash commands missing | Re-run the skills command, confirm `.kiro/skills/` exists, and start a new chat |
 | Custom agent cannot see skills | Add `skill://.kiro/skills/*/SKILL.md` to that custom agent's `resources` |

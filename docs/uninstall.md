@@ -25,11 +25,12 @@ claude mcp remove connectory     # if installed
 ## Skills
 
 ```bash
-npx skills remove check-idea check-plan check-code check-changes auto-check -a cursor -y
+npx skills remove check-idea check-plan check-code check-changes auto-check use-connectory connectory-setup -a cursor -y
 ```
 
-Replace `-a cursor` with your agent (`-a kiro-cli` for Kiro). Also delete copied folders if
-an older setup wrote files by hand:
+Replace `-a cursor` with your agent: `kiro-cli`, `claude-code`, `codex`,
+`github-copilot` (VS Code), or `windsurf`. Also delete copied folders if an older setup
+wrote files by hand:
 
 - `.cursor/skills/connectory/`
 - `.kiro/skills/connectory/`

@@ -44,5 +44,6 @@ See [README](../README.md).
 |---------|-----|
 | **connectory** not in MCP list | Confirm JSON syntax in `mcp_config.json`; refresh MCP |
 | Authentication fails | Use the GitHub account tied to your Connectory org |
+| A RepoQuest assessment would exceed the client deadline | Install/use `use-connectory`; it starts the assessment and polls its run instead of holding one long request |
 | `whoami` shows no `orgs` | Confirm membership at [app.connectory.ai](https://app.connectory.ai) |
 | Slash commands missing | Install skills manually or via `npx skills -a cursor --copy` |

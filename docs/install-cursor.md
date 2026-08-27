@@ -118,5 +118,6 @@ Reload Cursor, then try `/check-plan` in Agent chat.
 | Connected then **Error** / 0 tools | MCP settings → **Disconnect** → **Connect** again; reload window once. Do not change the URL after OAuth. |
 | Two **connectory** entries or flaky OAuth | Remove project `.cursor/mcp.json` connectory block if you use global install (or vice versa). One URL, one scope. |
 | Sign-in loop | Use the GitHub account tied to your Connectory org; Disconnect → Connect |
+| A RepoQuest assessment would exceed the client deadline | Install/use `use-connectory`; it calls `start_repoquest_check` and polls `get_repoquest_run` instead of holding one long request. Cursor does not document a portable per-server tool-timeout field. |
 | No organizations in whoami | Confirm membership at [app.connectory.ai](https://app.connectory.ai) |
 | `/check-plan` not in menu | `npx skills update -a cursor`, then reload |

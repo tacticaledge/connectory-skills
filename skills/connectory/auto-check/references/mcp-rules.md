@@ -29,7 +29,61 @@ before you implement. MCP tools only; local `git` is only for collecting diff te
 
 1. Call **`whoami`** once. Use **`whoami.orgs[].slug`** as `org_slug`.
 2. If the user belongs to several orgs, ask which org applies to this repo once.
-3. **`repo`**: short repository name from `git remote` when work is repo-specific.
+3. For repo-specific work, call **`list_repositories(org_slug)`** and select the exact
+   `owner` / `repo` returned by Connectory. A git remote helps identify the candidate; it
+   does not establish authorization.
+
+## Repository intelligence
+
+Use Connectory as a read-before-write intelligence layer, not only as a final policy gate:
+
+1. **`get_repository_context`** — organization, product, and repo context relevant to the
+   task. Treat it as prior institutional knowledge; verify current-code claims locally.
+2. **`get_repoquest`** — compact status, known stack/goals, findings count, and recommended
+   next checks.
+3. **`list_repoquest_checks`** / **`get_repoquest_check`** — read persisted observations
+   relevant to the task before spending time rediscovering them.
+4. Use **`check_idea`**, **`check_plan`**, **`check_code`**, or the branch-review flow at the
+   decision point where organizational guidance can still change the work.
+
+Do not run every RepoQuest check mechanically. Read existing results first, select only a
+revealed and runnable check that can materially reduce uncertainty, and verify findings
+against the current checkout.
+
+### Running a RepoQuest check
+
+`start_repoquest_check` performs external GitHub reads, billable analysis, and persists a
+result. Start it only when the user explicitly requested or approved that analysis.
+
+1. Call `start_repoquest_check(org_slug, owner, repo, check_id)` once.
+2. Preserve the returned `run_id` immediately.
+3. Poll `get_repoquest_run(org_slug, run_id)` after `poll_after_seconds` until
+   `completed` or `failed`. Do useful local work between polls.
+4. On `completed`, use the result as evidence to guide the task. On `failed`, report the
+   failure; never present it as a passing assessment.
+
+The start call returns quickly and execution continues independently of that MCP request.
+Do not increase polling frequency or start duplicates. If the start response itself is lost,
+retry it once: an active repo run is deduplicated and returns its `run_id`. The current
+lightweight execution tier survives client disconnects but an API deploy may interrupt it;
+`get_repoquest_run` reports that terminal failure instead of pretending the assessment passed.
+
+## Long-running MCP calls
+
+Some institutional checks legitimately take several minutes. Configure only settings the
+selected host documents:
+
+- **Codex:** `tool_timeout_sec = 600` (seconds) under `[mcp_servers.connectory]`; its omitted
+  default is 60 seconds.
+- **Kiro:** `"timeout": 600000` (milliseconds) on the `connectory` server.
+- **Claude Code:** current versions allow long MCP tool calls by default. If the environment
+  overrides `MCP_TOOL_TIMEOUT`, keep it at least `600000` ms; `MCP_TIMEOUT` is startup only.
+- **Cursor, VS Code, Windsurf:** do not invent an undocumented timeout field. RepoQuest uses
+  the fast start/poll workflow above so it does not depend on one long request.
+
+An almost-exact timeout with working `whoami` is a client deadline, not evidence that OAuth,
+org membership, Railway, or the Connectory API is down. Do not reconnect GitHub or OAuth to
+fix that symptom; use the selected host's install guide.
 
 ## Context scope
 
