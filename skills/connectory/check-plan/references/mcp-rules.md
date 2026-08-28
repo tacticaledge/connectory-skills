@@ -52,21 +52,17 @@ against the current checkout.
 
 ### Running a RepoQuest check
 
-`start_repoquest_check` performs external GitHub reads, billable analysis, and persists a
-result. Start it only when the user explicitly requested or approved that analysis.
+`run_repoquest_check` performs external GitHub reads, billable analysis, persists the result,
+and returns it. Call it only when the user explicitly requested or approved that analysis.
 
-1. Call `start_repoquest_check(org_slug, owner, repo, check_id)` once.
-2. Preserve the returned `run_id` immediately.
-3. Poll `get_repoquest_run(org_slug, run_id)` after `poll_after_seconds` until
-   `completed` or `failed`. Do useful local work between polls.
-4. On `completed`, use the result as evidence to guide the task. On `failed`, report the
-   failure; never present it as a passing assessment.
+1. Call `run_repoquest_check(org_slug, owner, repo, check_id)` once.
+2. Use the returned result as evidence and verify material findings in the current checkout.
+3. If the call fails or times out ambiguously, read `get_repoquest_check` first. If
+   `last_run_at` advanced, use that persisted result. Otherwise report the failure and ask
+   before retrying; never start duplicate billable analysis automatically.
 
-The start call returns quickly and execution continues independently of that MCP request.
-Do not increase polling frequency or start duplicates. If the start response itself is lost,
-retry it once: an active repo run is deduplicated and returns its `run_id`. The current
-lightweight execution tier survives client disconnects but an API deploy may interrupt it;
-`get_repoquest_run` reports that terminal failure instead of pretending the assessment passed.
+The tool directly invokes Connectory's existing RepoQuest check command. It does not create a
+separate MCP job or polling lifecycle.
 
 ## Long-running MCP calls
 
@@ -78,8 +74,8 @@ selected host documents:
 - **Kiro:** `"timeout": 600000` (milliseconds) on the `connectory` server.
 - **Claude Code:** current versions allow long MCP tool calls by default. If the environment
   overrides `MCP_TOOL_TIMEOUT`, keep it at least `600000` ms; `MCP_TIMEOUT` is startup only.
-- **Cursor, VS Code, Windsurf:** do not invent an undocumented timeout field. RepoQuest uses
-  the fast start/poll workflow above so it does not depend on one long request.
+- **Cursor, VS Code, Windsurf:** do not invent an undocumented timeout field. Call the tool
+  once; after an ambiguous timeout, read the persisted check before asking to retry it.
 
 An almost-exact timeout with working `whoami` is a client deadline, not evidence that OAuth,
 org membership, Railway, or the Connectory API is down. Do not reconnect GitHub or OAuth to

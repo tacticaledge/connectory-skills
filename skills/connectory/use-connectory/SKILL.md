@@ -16,8 +16,8 @@ For repo work, read `get_repository_context` and `get_repoquest` before rediscov
 goals, architecture, stack, or findings locally. Inspect only relevant persisted checks.
 
 Run a RepoQuest check only with user authorization and only when its result can change the
-work. Preserve the returned run ID and poll its status instead of holding or duplicating a
-long tool call.
+work. Call the synchronous tool once. If its response is ambiguous, read the persisted check
+before asking whether to retry; never duplicate billable analysis automatically.
 
 Connectory context is institutional guidance, not proof about the current checkout. Verify
 material code facts locally and use the stage-appropriate `check_*` tool before finishing.

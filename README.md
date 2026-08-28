@@ -165,8 +165,7 @@ Optional: add a short section to your repo's `AGENTS.md` so all agents see the w
 | `get_repoquest` | RepoQuest summary and useful next checks |
 | `list_repoquest_checks` | Revealed checks and persisted findings |
 | `get_repoquest_check` | One check and its latest result |
-| `start_repoquest_check` | Start one approved assessment and return immediately |
-| `get_repoquest_run` | Poll or recover a started assessment by run ID |
+| `run_repoquest_check` | Run one approved assessment through Connectory and return its result |
 | `check_idea` | Vet an idea or direction |
 | `check_plan` | Vet a multi-step plan |
 | `check_code` | Vet code / single file |
@@ -200,8 +199,8 @@ Details: [docs/security.md](docs/security.md)
 | Branch review incomplete | Run `prepare_review_diff` → local git → `check_changes` with full unified diff |
 
 Long-running behavior is client-aware: Codex uses `tool_timeout_sec = 600`, Kiro uses
-`"timeout": 600000`, and RepoQuest assessments return a run ID immediately so Cursor,
-VS Code, Windsurf, Claude Code, Kiro, and Codex can poll without holding one long request.
+`"timeout": 600000`, and other clients use their documented defaults. RepoQuest runs as one
+MCP call. If a client times out, read the persisted check before asking to retry it.
 
 Per-IDE guides include more detail: [docs/install-cursor.md](docs/install-cursor.md),
 [docs/install-vscode.md](docs/install-vscode.md), and siblings.

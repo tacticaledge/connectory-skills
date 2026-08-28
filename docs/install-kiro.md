@@ -26,8 +26,7 @@ If your organization gives you a different Connectory endpoint, use that URL ins
 never put OAuth tokens or client secrets in the file.
 
 Kiro's per-server `timeout` is in milliseconds. Ten minutes leaves headroom for synchronous
-Connectory institutional checks; RepoQuest assessments still use the immediate-return
-`start_repoquest_check` + `get_repoquest_run` polling workflow.
+Connectory institutional checks and targeted RepoQuest assessments.
 
 ## 2. Connect with GitHub
 
