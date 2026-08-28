@@ -1,8 +1,8 @@
-# Merge into .codex/config.toml. [features] must come before [mcp_servers.*]
-
-[features]
-experimental_use_rmcp_client = true
+# Merge into .codex/config.toml.
 
 [mcp_servers.connectory]
 url = "https://api.connectory.ai/mcp"
 enabled = true
+# Connectory analysis may legitimately take several minutes. Codex defaults to
+# 60 seconds when this is omitted.
+tool_timeout_sec = 600

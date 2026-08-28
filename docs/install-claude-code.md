@@ -52,5 +52,6 @@ See [README](../README.md).
 |---------|-----|
 | `connectory` not in `/mcp` list | Confirm `.mcp.json` at project root; restart Claude Code |
 | Authentication loop | Sign in with the GitHub account tied to your Connectory org |
+| A synchronous Connectory tool times out | Current Claude Code versions allow long MCP calls by default. If your environment overrides `MCP_TOOL_TIMEOUT`, keep it at least `600000` ms; `MCP_TIMEOUT` controls startup instead. |
 | `whoami` shows no `orgs` | Confirm membership at [app.connectory.ai](https://app.connectory.ai) |
 | Slash commands missing | `npx skills update -a claude-code` then restart |
