@@ -7,32 +7,32 @@ trap 'rm -rf "${tmp}"' EXIT
 
 "${root}/scripts/sync-mcp-reference.sh"
 
-cd "${tmp}"
-npx --yes skills add "${root}" -a cursor --copy -y >/dev/null
-npx --yes skills add "${root}" -a kiro-cli --copy -y >/dev/null
-
 missing=0
-for skill in auto-check check-changes check-code check-idea check-plan connectory-setup; do
-  if [[ ! -f ".agents/skills/${skill}/SKILL.md" ]]; then
-    echo "MISSING Cursor skill: ${skill}/SKILL.md" >&2
-    missing=1
-  fi
-  if [[ ! -f ".kiro/skills/${skill}/SKILL.md" ]]; then
-    echo "MISSING Kiro skill: ${skill}/SKILL.md" >&2
-    missing=1
-  fi
-done
-for skill in auto-check check-changes check-code check-idea check-plan; do
-  cursor_ref=".agents/skills/${skill}/references/mcp-rules.md"
-  if [[ ! -f "${cursor_ref}" ]]; then
-    echo "MISSING Cursor reference: ${cursor_ref}" >&2
-    missing=1
-  fi
-  kiro_ref=".kiro/skills/${skill}/references/mcp-rules.md"
-  if [[ ! -f "${kiro_ref}" ]]; then
-    echo "MISSING Kiro reference: ${kiro_ref}" >&2
-    missing=1
-  fi
+agents=(cursor kiro-cli claude-code codex github-copilot windsurf)
+skill_roots=(.agents/skills .kiro/skills .claude/skills .agents/skills .agents/skills .windsurf/skills)
+skills=(auto-check check-changes check-code check-idea check-plan connectory-setup use-connectory)
+referenced_skills=(auto-check check-changes check-code check-idea check-plan use-connectory)
+
+for index in "${!agents[@]}"; do
+  agent="${agents[index]}"
+  install_dir="${tmp}/${agent}"
+  mkdir -p "${install_dir}"
+  cd "${install_dir}"
+  npx --yes skills add "${root}" -a "${agent}" --copy -y >/dev/null
+  skill_root="${install_dir}/${skill_roots[index]}"
+
+  for skill in "${skills[@]}"; do
+    if [[ ! -f "${skill_root}/${skill}/SKILL.md" ]]; then
+      echo "MISSING ${agent} skill: ${skill}/SKILL.md" >&2
+      missing=1
+    fi
+  done
+  for skill in "${referenced_skills[@]}"; do
+    if [[ ! -f "${skill_root}/${skill}/references/mcp-rules.md" ]]; then
+      echo "MISSING ${agent} reference: ${skill}/references/mcp-rules.md" >&2
+      missing=1
+    fi
+  done
 done
 
 if [[ "${missing}" -ne 0 ]]; then
@@ -40,4 +40,4 @@ if [[ "${missing}" -ne 0 ]]; then
   exit 1
 fi
 
-echo "verify-install: OK (Cursor + Kiro; 6 skills, 5 bundled references each)"
+echo "verify-install: OK (6 agents; 7 skills, 6 bundled references each)"

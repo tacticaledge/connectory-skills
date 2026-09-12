@@ -42,6 +42,7 @@ checks while you code.
 
 | What | How |
 |------|-----|
+| **Repository intelligence** | Connected repos, institutional context, and persisted RepoQuest findings |
 | **Policy checks in your IDE** | MCP tools `check_idea`, `check_plan`, `check_code`, `check_changes` |
 | **Slash commands** | `/check-plan`, `/check-code`, etc. (after `npx skills add`) |
 | **Org context** | Goals, policies, and repo knowledge from [app.connectory.ai](https://app.connectory.ai) |
@@ -107,7 +108,7 @@ npx skills add https://github.com/tacticaledge/connectory-skills -a cursor --cop
 | Kiro | `-a kiro-cli` |
 | Claude Code | `-a claude-code` |
 | Codex | `-a codex` |
-| VS Code | `-a vscode` |
+| VS Code / Copilot | `-a github-copilot` |
 | Windsurf | `-a windsurf` (or copy skills manually; see [install-windsurf.md](docs/install-windsurf.md)) |
 
 Reload your IDE window if `/check-plan` does not appear in the slash menu.
@@ -143,6 +144,7 @@ missing, redo [Install skills](#install-skills).
 | `/check-code` | `check_code` | Single file or snippet |
 | `/check-changes` | `prepare_review_diff` → `check_changes` | Multi-file branch review |
 | `auto-check` | background `check_*` | Optional async check after edits (Cursor) |
+| `use-connectory` | repo context + RepoQuest + `check_*` | Org-aware workflow for nontrivial coding work |
 | `connectory-setup` | (guide) | Walk through full install |
 
 **Verdicts:** `aligned` (go), `caution` (read guidance), `misaligned` (stop),
@@ -158,6 +160,12 @@ Optional: add a short section to your repo's `AGENTS.md` so all agents see the w
 | Tool | Purpose |
 |------|---------|
 | `whoami` | Identity + org memberships (call once per session) |
+| `list_repositories` | Repositories the signed-in user can access in an org |
+| `get_repository_context` | Scoped org, product, and repository intelligence |
+| `get_repoquest` | RepoQuest summary and useful next checks |
+| `list_repoquest_checks` | Revealed checks and persisted findings |
+| `get_repoquest_check` | One check and its latest result |
+| `run_repoquest_check` | Run one approved assessment through Connectory and return its result |
 | `check_idea` | Vet an idea or direction |
 | `check_plan` | Vet a multi-step plan |
 | `check_code` | Vet code / single file |
@@ -190,6 +198,10 @@ Details: [docs/security.md](docs/security.md)
 | Slash commands missing | `npx skills update -a <agent>` then reload IDE |
 | Branch review incomplete | Run `prepare_review_diff` → local git → `check_changes` with full unified diff |
 
+Long-running behavior is client-aware: Codex uses `tool_timeout_sec = 600`, Kiro uses
+`"timeout": 600000`, and other clients use their documented defaults. RepoQuest runs as one
+MCP call. If a client times out, read the persisted check before asking to retry it.
+
 Per-IDE guides include more detail: [docs/install-cursor.md](docs/install-cursor.md),
 [docs/install-vscode.md](docs/install-vscode.md), and siblings.
 
@@ -220,7 +232,7 @@ connectory-skills/
 ├── assets/                   ← demo media (coming soon)
 └── skills/
     ├── connectory-setup/     ← install wizard skill
-    └── connectory/           ← check-*, auto-check
+    └── connectory/           ← use-connectory, check-*, auto-check
 ```
 
 Compatible with [Agent Skills](https://agentskills.io) and [`npx skills`](https://github.com/vercel-labs/skills).

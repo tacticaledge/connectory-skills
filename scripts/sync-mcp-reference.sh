@@ -9,6 +9,7 @@ targets=(
   skills/connectory/check-code/references/mcp-rules.md
   skills/connectory/check-idea/references/mcp-rules.md
   skills/connectory/check-plan/references/mcp-rules.md
+  skills/connectory/use-connectory/references/mcp-rules.md
 )
 for rel in "${targets[@]}"; do
   dest="${root}/${rel}"

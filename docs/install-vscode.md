@@ -36,7 +36,7 @@ Ask your agent to call Connectory tool **`whoami`**.
 ## 5. Install slash commands (recommended)
 
 ```bash
-npx skills add https://github.com/tacticaledge/connectory-skills -a vscode --copy -y
+npx skills add https://github.com/tacticaledge/connectory-skills -a github-copilot --copy -y
 ```
 
 See [README](../README.md).
@@ -48,4 +48,5 @@ See [README](../README.md).
 | **connectory** not listed | Confirm `.vscode/mcp.json` uses `"servers"` key; reload |
 | Authentication fails | Use the GitHub account tied to your Connectory org |
 | No organizations in whoami | Confirm membership at [app.connectory.ai](https://app.connectory.ai) |
-| Slash commands missing | `npx skills update -a vscode` then reload |
+| A RepoQuest assessment exceeds the client deadline | Read `get_repoquest_check` first; use the persisted result if `last_run_at` advanced, otherwise ask before retrying |
+| Slash commands missing | `npx skills update -a github-copilot` then reload |

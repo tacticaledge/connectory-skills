@@ -19,15 +19,22 @@ Guide the user through the setup guide in this repo:
    Default URL: `https://api.connectory.ai/mcp`. If the user explicitly supplies a different
    Connectory MCP URL, use that URL consistently instead of the default; do not silently
    rewrite it. OAuth via GitHub in IDE settings (Connect, not Logout). Product home:
-   `https://app.connectory.ai`.
-2. **Rebind after a config change**: if this setup added `connectory` or changed its URL,
+   `https://app.connectory.ai`. **Codex:** the `[mcp_servers.connectory]` block must include
+   `tool_timeout_sec = 600`; its omitted default is 60 seconds, while Connectory analysis
+   can legitimately take several minutes. This is separate from `startup_timeout_sec`.
+   **Kiro:** set the `connectory` server's `"timeout": 600000` (milliseconds); do not
+   confuse it with Kiro's MCP initialization timeout. Do not add timeout fields that the
+   selected host does not document.
+2. **Rebind after a loaded config change**: if an already-running host had loaded a different
+   Connectory URL or timeout,
    the MCP tools already loaded in the current host may still target the previous server.
    Do **not** call that session's `whoami` or use it to diagnose identity or membership.
    Follow the host guide's reload action, stop, and resume after the host reconnects.
    For the Codex IDE extension use **gear menu → MCP servers → Restart extension**;
    starting another chat in the same extension host is not a rebind. On resume, run
    `codex mcp get connectory` and require the exact requested URL before continuing.
-   Skip this step when setup made no MCP configuration change.
+   A first-time install configured before the host connects needs no extra rebind. Skip this
+   step when setup made no change to configuration the host had already loaded.
 3. **Authenticate**: complete the host's OAuth flow after the rebind when authentication
    is required.
 4. **Verify**: only from the rebound host, call MCP `whoami`. Expect `orgs` with at least
@@ -44,6 +51,6 @@ Guide the user through the setup guide in this repo:
 | Kiro | `kiro-cli` |
 | Claude Code | `claude-code` |
 | Codex | `codex` |
-| VS Code | `vscode` |
+| VS Code / Copilot | `github-copilot` |
 
 Do not install application Python packages. MCP + skills only.

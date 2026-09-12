@@ -1,7 +1,8 @@
 {
   "mcpServers": {
     "connectory": {
-      "url": "https://api.connectory.ai/mcp"
+      "url": "https://api.connectory.ai/mcp",
+      "timeout": 600000
     }
   }
 }
